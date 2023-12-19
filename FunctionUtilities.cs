@@ -65,12 +65,34 @@
             }
         }
 
-        public static int AskUserValue(string askMsg = "Proporcioname un valor: ")
+        public static string AskUserValue(string askMsg = "", string[] args = null)
         {
-            int result;
-            Console.Write(askMsg);
-            result = Convert.ToInt32(Console.ReadLine());
-            return result;
+            args = args ?? new string[0];
+            Console.Write(askMsg, args);
+            return Console.ReadLine();
+        }
+
+        public static int AskTroughMenu(string[] options, string askMsg = "", string menuMsg = "", string errorMsg = "")
+        {
+            int answer;
+            bool repeated = false;
+            do
+            {
+                if (repeated)
+                {
+                    Console.WriteLine(errorMsg);
+                }
+                repeated = true;
+                Console.WriteLine(menuMsg);
+                for (int i = 0; i < options.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {options[i]}");
+                }
+                Console.Write(askMsg);
+                answer = Convert.ToInt32(Console.ReadLine());
+            } while (answer <= 0 || answer >options.Length) ;
+            
+            return answer;
         }
     }
 }
