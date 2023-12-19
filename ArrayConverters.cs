@@ -11,6 +11,7 @@ namespace Utilities
             {
                 result[i] = Convert.ToInt32(values[i]);
             }
+            return result;
         }
     }
 }
